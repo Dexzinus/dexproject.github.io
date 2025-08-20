@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Projects Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6366f1',
+                        secondary: '#8b5cf6',
+                        accent: '#06b6d4',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 min-h-screen">
+    <!-- Header -->
+    <header class="bg-black/20 backdrop-blur-sm border-b border-white/10 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-white">My Projects</h1>
+                        <p class="text-sm text-gray-300">Showcasing my work and innovations</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button id="addProjectBtn" class="bg-white/10 hover:bg-white/20 text-white px-6 py-2 rounded-xl font-medium transition-all duration-200 backdrop-blur-sm border border-white/20 flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                        Add Project
+                    </button>
+                    <button id="logoutBtn" class="hidden bg-red-500/20 hover:bg-red-500/30 text-red-300 px-4 py-2 rounded-xl font-medium transition-all duration-200 border border-red-500/30">
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-5xl md:text-6xl font-bold text-white mb-6">
+                My <span class="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Projects</span>
+            </h2>
+            <p class="text-xl text-gray-300 mb-12 leading-relaxed">
+                Explore my journey through innovative solutions, creative designs, and technical excellence. 
+                Each project represents a step forward in my growth as a developer.
+            </p>
+        </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <section class="px-4 sm:px-6 lg:px-8 pb-20">
+        <div class="max-w-7xl mx-auto">
+            <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Projects will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Add Project Modal -->
+    <div id="addProjectModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden">
+        <div class="bg-slate-800 rounded-2xl p-8 max-w-2xl w-full max-h-screen overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-white">Add New Project</h3>
+                <button id="closeModal" class="text-gray-400 hover:text-white transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-2">Project Title</label>
+                    <input type="text" id="projectTitle" class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Enter project title">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-2">Description</label>
+                    <textarea id="projectDescription" rows="4" class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Describe your project in detail"></textarea>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-2">Image URL (optional)</label>
+                    <input type="text" id="projectImage" class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="https://example.com/image.jpg">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-2">Tags (comma separated)</label>
+                    <input type="text" id="projectTags" class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="React, Node.js, MongoDB">
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">GitHub URL</label>
+                        <input type="text" id="projectGithub" class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="https://github.com/username/project">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">Live Demo URL</label>
+                        <input type="text" id="projectLive" class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="https://project-demo.com">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex gap-4 mt-8">
+                <button id="addProject" class="flex-1 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-6 py-3 rounded-xl font-medium transition-all duration-200">
+                    Add Project
+                </button>
+                <button id="cancelAdd" class="px-6 py-3 border border-gray-600 text-gray-300 hover:bg-gray-700 rounded-xl font-medium transition-colors duration-200">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden">
+        <div class="bg-slate-800 rounded-2xl p-8 max-w-md w-full">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-white">Delete Project</h3>
+                <button id="closeDeleteModal" class="text-gray-400 hover:text-white transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="space-y-4">
+                <p class="text-gray-300">Are you sure you want to delete <span id="deleteProjectTitle" class="font-bold text-white"></span>?</p>
+                <p class="text-gray-400 text-sm">This action cannot be undone.</p>
+            </div>
+            
+            <div class="flex gap-4 mt-8">
+                <button id="confirmDelete" class="flex-1 bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-xl font-medium transition-all duration-200">
+                    Delete
+                </button>
+                <button id="cancelDelete" class="px-6 py-3 border border-gray-600 text-gray-300 hover:bg-gray-700 rounded-xl font-medium transition-colors duration-200">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Authentication Modal -->
+    <div id="authModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+        <div class="bg-slate-800 rounded-2xl p-8 max-w-md w-full">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-white">Admin Login</h3>
+                <button id="closeAuth" class="text-gray-400 hover:text-white transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-2">Username</label>
+                    <input type="text" id="username" class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Enter username">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-2">Password</label>
+                    <input type="password" id="password" class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent" placeholder="Enter password">
+                </div>
+                
+                <div id="authError" class="text-red-400 text-sm bg-red-500/10 p-3 rounded-lg hidden">
+                    Invalid credentials. Please try again.
+                </div>
+                
+                <div class="text-sm text-gray-400 bg-blue-500/10 p-3 rounded-lg">
+                    <p><strong>Login Credentials:</strong></p>
+                    <p>Username: <span class="text-blue-300 font-medium">admin</span></p>
+                    <p>Password: <span class="text-blue-300 font-medium">secure123</span></p>
+                </div>
+            </div>
+            
+            <div class="flex gap-4 mt-8">
+                <button id="loginBtn" class="flex-1 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-6 py-3 rounded-xl font-medium transition-all duration-200">
+                    Login
+                </button>
+                <button id="cancelAuth" class="px-6 py-3 border border-gray-600 text-gray-300 hover:bg-gray-700 rounded-xl font-medium transition-colors duration-200">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-black/20 backdrop-blur-sm border-t border-white/10 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-gray-400">
+                © <span id="currentYear"></span> My Projects Portfolio. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Set current year
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Admin credentials
+        const ADMIN_USERNAME = 'admin';
+        const ADMIN_PASSWORD = 'secure123';
+        let isLoggedIn = false;
+        let projectToDelete = null;
+
+        // DOM elements
+        const projectsGrid = document.getElementById('projectsGrid');
+        const addProjectBtn = document.getElementById('addProjectBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const addProjectModal = document.getElementById('addProjectModal');
+        const deleteModal = document.getElementById('deleteModal');
+        const authModal = document.getElementById('authModal');
+        const closeModal = document.getElementById('closeModal');
+        const closeDeleteModal = document.getElementById('closeDeleteModal');
+        const closeAuth = document.getElementById('closeAuth');
+        const cancelAdd = document.getElementById('cancelAdd');
+        const cancelDelete = document.getElementById('cancelDelete');
+        const cancelAuth = document.getElementById('cancelAuth');
+        const loginBtn = document.getElementById('loginBtn');
+        const addProject = document.getElementById('addProject');
+        const confirmDelete = document.getElementById('confirmDelete');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const authError = document.getElementById('authError');
+        const projectTitle = document.getElementById('projectTitle');
+        const projectDescription = document.getElementById('projectDescription');
+        const projectImage = document.getElementById('projectImage');
+        const projectTags = document.getElementById('projectTags');
+        const projectGithub = document.getElementById('projectGithub');
+        const projectLive = document.getElementById('projectLive');
+        const deleteProjectTitle = document.getElementById('deleteProjectTitle');
+
+        // Get projects from localStorage or use default
+        function getProjects() {
+            const saved = localStorage.getItem('myProjects');
+            if (saved) {
+                try {
+                    return JSON.parse(saved);
+                } catch (e) {
+                    console.error('Error parsing saved projects:', e);
+                }
+            }
+            // Default projects
+            return [
+                {
+                    id: 1,
+                    title: "E-Commerce Platform",
+                    description: "A full-stack e-commerce solution with React, Node.js, and MongoDB. Features include user authentication, payment processing, and admin dashboard.",
+                    image: "https://placehold.co/400x250/6366f1/ffffff?text=E-Commerce+Platform",
+                    tags: ["React", "Node.js", "MongoDB", "Stripe"],
+                    github: "https://github.com/username/ecommerce",
+                    live: "https://ecommerce-demo.com"
+                },
+                {
+                    id: 2,
+                    title: "Weather Dashboard",
+                    description: "Real-time weather application with beautiful UI, showing current conditions, forecasts, and interactive maps using weather APIs.",
+                    image: "https://placehold.co/400x250/8b5cf6/ffffff?text=Weather+Dashboard",
+                    tags: ["React", "API", "Chart.js", "Tailwind"],
+                    github: "https://github.com/username/weather-app",
+                    live: "https://weather-demo.com"
+                },
+                {
+                    id: 3,
+                    title: "Task Management App",
+                    description: "Kanban-style task management system with drag-and-drop functionality, team collaboration features, and real-time updates.",
+                    image: "https://placehold.co/400x250/06b6d4/ffffff?text=Task+Manager",
+                    tags: ["Vue.js", "Firebase", "Draggable", "Responsive"],
+                    github: "https://github.com/username/task-manager",
+                    live: "https://tasks-demo.com"
+                },
+                {
+                    id: 4,
+                    title: "Portfolio Website",
+                    description: "Minimalist portfolio website with smooth animations, project showcase, and contact form built with modern web technologies.",
+                    image: "https://placehold.co/400x250/10b981/ffffff?text=Portfolio+Site",
+                    tags: ["HTML", "CSS", "JavaScript", "GSAP"],
+                    github: "https://github.com/username/portfolio",
+                    live: "https://portfolio-demo.com"
+                }
+            ];
+        }
+
+        // Save projects to localStorage
+        function saveProjects(projects) {
+            localStorage.setItem('myProjects', JSON.stringify(projects));
+        }
+
+        // Projects array
+        let projects = getProjects();
+
+        // Render projects
+        function renderProjects() {
+            projectsGrid.innerHTML = '';
+            projects.forEach(project => {
+                const projectElement = document.createElement('div');
+                projectElement.className = 'bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/20 hover:bg-white/15 transition-all duration-300 group';
+                projectElement.innerHTML = `
+                    <div class="relative overflow-hidden">
+                        <img src="${project.image}" alt="${project.title}" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-3">
+                            <h3 class="text-xl font-bold text-white">${project.title}</h3>
+                            ${isLoggedIn ? `
+                                <button data-id="${project.id}" class="delete-btn text-red-400 hover:text-red-300 transition-colors">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                    </svg>
+                                </button>
+                            ` : ''}
+                        </div>
+                        <p class="text-gray-300 mb-4 leading-relaxed">${project.description}</p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            ${project.tags.map(tag => `
+                                <span class="px-3 py-1 bg-purple-500/20 text-purple-300 text-sm rounded-full border border-purple-500/30">
+                                    ${tag}
+                                </span>
+                            `).join('')}
+                        </div>
+                        
+                        <div class="flex gap-3">
+                            ${project.github ? `
+                                <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-center font-medium transition-colors duration-200 flex items-center justify-center gap-2">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                    </svg>
+                                    GitHub
+                                </a>
+                            ` : ''}
+                            ${project.live ? `
+                                <a href="${project.live}" target="_blank" rel="noopener noreferrer" class="flex-1 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-4 py-2 rounded-lg text-center font-medium transition-all duration-200 flex items-center justify-center gap-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                    </svg>
+                                    Live Demo
+                                </a>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+                projectsGrid.appendChild(projectElement);
+            });
+
+            // Add event listeners to delete buttons
+            if (isLoggedIn) {
+                document.querySelectorAll('.delete-btn').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const projectId = parseInt(e.currentTarget.getAttribute('data-id'));
+                        const project = projects.find(p => p.id === projectId);
+                        if (project) {
+                            projectToDelete = projectId;
+                            deleteProjectTitle.textContent = project.title;
+                            deleteModal.classList.remove('hidden');
+                        }
+                    });
+                });
+            }
+        }
+
+        // Initial render
+        renderProjects();
+
+        // Event Listeners
+        addProjectBtn.addEventListener('click', () => {
+            if (isLoggedIn) {
+                // Clear form fields
+                projectTitle.value = '';
+                projectDescription.value = '';
+                projectImage.value = '';
+                projectTags.value = '';
+                projectGithub.value = '';
+                projectLive.value = '';
+                addProjectModal.classList.remove('hidden');
+            } else {
+                authModal.classList.remove('hidden');
+            }
+        });
+
+        logoutBtn.addEventListener('click', () => {
+            isLoggedIn = false;
+            logoutBtn.classList.add('hidden');
+            addProjectBtn.innerHTML = `
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+                Add Project
+            `;
+            renderProjects();
+        });
+
+        closeModal.addEventListener('click', () => {
+            addProjectModal.classList.add('hidden');
+        });
+
+        closeDeleteModal.addEventListener('click', () => {
+            deleteModal.classList.add('hidden');
+            projectToDelete = null;
+        });
+
+        closeAuth.addEventListener('click', () => {
+            authModal.classList.add('hidden');
+        });
+
+        cancelAdd.addEventListener('click', () => {
+            addProjectModal.classList.add('hidden');
+        });
+
+        cancelDelete.addEventListener('click', () => {
+            deleteModal.classList.add('hidden');
+            projectToDelete = null;
+        });
+
+        cancelAuth.addEventListener('click', () => {
+            authModal.classList.add('hidden');
+        });
+
+        loginBtn.addEventListener('click', () => {
+            const username = usernameInput.value;
+            const password = passwordInput.value;
+            
+            if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+                isLoggedIn = true;
+                authModal.classList.add('hidden');
+                logoutBtn.classList.remove('hidden');
+                addProjectBtn.innerHTML = `
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                    </svg>
+                    Add Project
+                `;
+                usernameInput.value = '';
+                passwordInput.value = '';
+                authError.classList.add('hidden');
+                renderProjects();
+            } else {
+                authError.classList.remove('hidden');
+            }
+        });
+
+        addProject.addEventListener('click', () => {
+            const title = projectTitle.value.trim();
+            const description = projectDescription.value.trim();
+            
+            if (title && description) {
+                const newProject = {
+                    id: projects.length > 0 ? Math.max(...projects.map(p => p.id)) + 1 : 1,
+                    title: title,
+                    description: description,
+                    image: projectImage.value || `https://placehold.co/400x250/6366f1/ffffff?text=${encodeURIComponent(title)}`,
+                    tags: projectTags.value ? projectTags.value.split(',').map(tag => tag.trim()) : [],
+                    github: projectGithub.value,
+                    live: projectLive.value
+                };
+                
+                projects.push(newProject);
+                saveProjects(projects); // Save to localStorage
+                renderProjects();
+                
+                // Reset form
+                projectTitle.value = '';
+                projectDescription.value = '';
+                projectImage.value = '';
+                projectTags.value = '';
+                projectGithub.value = '';
+                projectLive.value = '';
+                
+                addProjectModal.classList.add('hidden');
+            }
+        });
+
+        confirmDelete.addEventListener('click', () => {
+            if (projectToDelete !== null) {
+                projects = projects.filter(project => project.id !== projectToDelete);
+                saveProjects(projects); // Save to localStorage
+                renderProjects();
+                deleteModal.classList.add('hidden');
+                projectToDelete = null;
+            }
+        });
+
+        // Close modals when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === addProjectModal) {
+                addProjectModal.classList.add('hidden');
+            }
+            if (e.target === deleteModal) {
+                deleteModal.classList.add('hidden');
+                projectToDelete = null;
+            }
+            if (e.target === authModal) {
+                authModal.classList.add('hidden');
+            }
+        });
+
+        // Handle page refresh - restore login state
+        window.addEventListener('beforeunload', () => {
+            localStorage.setItem('isLoggedIn', isLoggedIn.toString());
+        });
+
+        // On page load, check if user was previously logged in
+        window.addEventListener('load', () => {
+            const wasLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            if (wasLoggedIn) {
+                isLoggedIn = true;
+                logoutBtn.classList.remove('hidden');
+                addProjectBtn.innerHTML = `
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                    </svg>
+                    Add Project
+                `;
+                renderProjects();
+            }
+        });
+    </script>
+</body>
+</html>
